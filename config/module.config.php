@@ -32,14 +32,6 @@ return [
                 'remember_me_service' => 'Zoop\GatewayModule\RememberMeService',
             ],
 
-            'authenticated_user_controller_options' => [
-                'serializer' => 'shard.default.serializer',
-                'authentication_service' => 'Zend\Authentication\AuthenticationService',
-                'data_username_key' => 'username',
-                'data_password_key' => 'password',
-                'data_rememberme_key' => 'rememberMe'
-            ],
-
             'remember_me_service_options' => [
                 'cookie_name' => 'rememberMe',
                 'cookie_expire' => 60 * 60 * 24 * 14, //14 days
@@ -65,14 +57,22 @@ return [
         'shard' => [
             'manifest' => [
                 'default' => [
-                    'document_manager' => 'doctrine.odm.documentmanager.default',
                     'extension_configs' => [
-                        'extension.rest' => [],
                         'extension.serializer' => true,
                     ],
-                    'documents' => [
+                    'models' => [
                         'Zoop\GatewayModule\DataModel' => __DIR__ . '/../src/Zoop/GatewayModule/DataModel'
                     ]
+                ]
+            ],
+            'rest' => [
+                'authenticated-user' => [
+                    'options_class' => 'Zoop\GatewayModule\Options\AuthenticatedUserControllerOptions',
+                    'serializer' => 'shard.default.serializer',
+                    'authentication_service' => 'Zend\Authentication\AuthenticationService',
+                    'data_username_key' => 'username',
+                    'data_password_key' => 'password',
+                    'data_rememberme_key' => 'rememberMe'
                 ]
             ]
         ]
@@ -97,7 +97,7 @@ return [
 
     'controllers' => [
         'factories' => [
-            'rest.default.authenticateduser' => 'Zoop\GatewayModule\Service\AuthenticatedUserControllerFactory'
+            'shard.rest.authenticated-user' => 'Zoop\GatewayModule\Service\AuthenticatedUserControllerFactory'
         ],
     ],
 

@@ -45,7 +45,7 @@ class PerRequestAuthTest extends AbstractHttpControllerTestCase
         $this->getRequest()
             ->setMethod(Request::METHOD_GET)
             ->getHeaders()->addHeader(
-                GenericHeader::fromString('Authorization: Basic ' . base64_encode('toby:password'))
+                GenericHeader::fromString('Authorization: Basic ' . base64_encode('toby:password1'))
             );
 
         $this->dispatch('https://test.com/test');
@@ -77,14 +77,13 @@ class PerRequestAuthTest extends AbstractHttpControllerTestCase
         $this->getRequest()
             ->setMethod(Request::METHOD_GET)
             ->getHeaders()->addHeader(
-                GenericHeader::fromString('Authorization: Basic ' . base64_encode('toby:password'))
+                GenericHeader::fromString('Authorization: Basic ' . base64_encode('toby:password1'))
             );
 
         $this->dispatch('http://test.com/test');
 
         $response = $this->getResponse();
 
-        $this->assertResponseStatusCode(403);
         $this->assertEquals('false', $response->getContent());
     }
 }

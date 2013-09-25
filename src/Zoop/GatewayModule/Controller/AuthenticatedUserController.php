@@ -6,7 +6,7 @@
 namespace Zoop\GatewayModule\Controller;
 
 use Zoop\GatewayModule\Exception;
-use Zoop\GatewayModule\Options\AuthenticatedUserController as Options;
+use Zoop\GatewayModule\Options\AuthenticatedUserControllerOptions as Options;
 use Zend\Http\Header\Location;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\Mvc\MvcEvent;

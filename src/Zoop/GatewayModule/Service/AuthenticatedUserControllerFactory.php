@@ -7,7 +7,6 @@
 namespace Zoop\GatewayModule\Service;
 
 use Zoop\GatewayModule\Controller\AuthenticatedUserController;
-use Zoop\GatewayModule\Options\AuthenticatedUserController as Options;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -19,6 +18,14 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class AuthenticatedUserControllerFactory implements FactoryInterface
 {
+    protected $restControllerMap;
+
+    protected function getRestControllerMap($serviceLocator){
+        if (!isset($this->restControllerMap)) {
+            $this->restControllerMap = $serviceLocator->get('zoop.shardmodule.restcontrollermap');
+        }
+        return $this->restControllerMap;
+    }
 
     /**
      *
@@ -27,14 +34,8 @@ class AuthenticatedUserControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-
-        $options = new Options(
-            $serviceLocator->getServiceLocator()
-                ->get('config')['zoop']['gateway']['authenticated_user_controller_options']
-        );
-        $options->setServiceLocator($serviceLocator->getServiceLocator());
-        $instance = new AuthenticatedUserController($options);
-
-        return $instance;
+        return new AuthenticatedUserController(
+            $this->getRestControllerMap($serviceLocator->getServiceLocator())->getOptionsFromEndpoint('authenticated-user')
+        );        
     }
 }

@@ -14,8 +14,9 @@ use Zend\Stdlib\AbstractOptions;
  * @version $Revision$
  * @author  Tim Roediger <superdweebie@gmail.com>
  */
-class AuthenticatedUserController extends AbstractOptions
+class AuthenticatedUserControllerOptions extends AbstractOptions
 {
+    protected $endpoint;
 
     protected $serviceLocator;
 
@@ -36,6 +37,14 @@ class AuthenticatedUserController extends AbstractOptions
     protected $dataPasswordKey;
 
     protected $dataRememberMeKey;
+
+    public function getEndpoint() {
+        return $this->endpoint;
+    }
+
+    public function setEndpoint($endpoint) {
+        $this->endpoint = $endpoint;
+    }
 
     public function getServiceLocator()
     {

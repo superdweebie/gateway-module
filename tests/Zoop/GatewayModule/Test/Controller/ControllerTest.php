@@ -49,7 +49,7 @@ class ControllerTest extends AbstractHttpControllerTestCase
             ->setMethod(Request::METHOD_DELETE)
             ->getHeaders()->addHeader($accept);
 
-        $this->dispatch('/rest/authenticatedUser');
+        $this->dispatch('/rest/authenticated-user');
 
         $response = $this->getResponse();
         $result = json_decode($response->getContent(), true);
@@ -108,7 +108,7 @@ class ControllerTest extends AbstractHttpControllerTestCase
 
         $this->getRequest()
             ->setMethod(Request::METHOD_POST)
-            ->setContent('{"username": "toby", "password": "password"}')
+            ->setContent('{"username": "toby", "password": "password1"}')
             ->getHeaders()->addHeaders([$accept, ContentType::fromString('Content-type: application/json')]);
 
         $this->dispatch('/rest/authenticated-user');
@@ -135,7 +135,7 @@ class ControllerTest extends AbstractHttpControllerTestCase
 
         $this->getRequest()
             ->setMethod(Request::METHOD_POST)
-            ->setContent('{"username": "toby", "password": "password"}')
+            ->setContent('{"username": "toby", "password": "password1"}')
             ->getHeaders()->addHeaders([$accept, ContentType::fromString('Content-type: application/json')]);
 
         $this->dispatch('/rest/authenticated-user');
@@ -182,7 +182,7 @@ class ControllerTest extends AbstractHttpControllerTestCase
     public function testGetWithAuthenticatedUser()
     {
         $this->getApplicationServiceLocator()
-            ->get('Zend\Authentication\AuthenticationService')->login('toby', 'password');
+            ->get('Zend\Authentication\AuthenticationService')->login('toby', 'password1');
 
         $accept = new Accept;
         $accept->addMediaType('application/json');

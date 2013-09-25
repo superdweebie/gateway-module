@@ -50,7 +50,7 @@ class ControllerRememberMeTest extends AbstractHttpControllerTestCase
 
         $this->getRequest()
             ->setMethod(Request::METHOD_POST)
-            ->setContent('{"username": "toby", "password": "password", "rememberMe": true}')
+            ->setContent('{"username": "toby", "password": "password1", "rememberMe": true}')
             ->getHeaders()->addHeaders([$accept, ContentType::fromString('Content-type: application/json')]);
 
         $this->dispatch('/rest/authenticatedUser');
@@ -77,7 +77,7 @@ class ControllerRememberMeTest extends AbstractHttpControllerTestCase
             ->get('Zend\Authentication\AuthenticationService');
 
         //do inital login
-        $authenticationService->login('toby', 'password', true);
+        $authenticationService->login('toby', 'password1', true);
 
         //get the remember me object
         $rememberMeObject = $this->documentManager
@@ -127,7 +127,7 @@ class ControllerRememberMeTest extends AbstractHttpControllerTestCase
            ->get('Zend\Authentication\AuthenticationService');
 
         //do inital login
-        $authenticationService->login('toby', 'password', true);
+        $authenticationService->login('toby', 'password1', true);
 
         //get the remember me object
         $rememberMeObject = $this->documentManager
@@ -150,7 +150,7 @@ class ControllerRememberMeTest extends AbstractHttpControllerTestCase
 
         $this->getRequest()
             ->setMethod(Request::METHOD_POST)
-            ->setContent('{"username": "toby", "password": "password", "rememberMe": true}')
+            ->setContent('{"username": "toby", "password": "password1", "rememberMe": true}')
             ->getHeaders()->addHeaders(
                 [$accept, $requestCookie, ContentType::fromString('Content-type: application/json')]
             );
@@ -202,7 +202,7 @@ class ControllerRememberMeTest extends AbstractHttpControllerTestCase
             ->get('Zend\Authentication\AuthenticationService');
 
         //do inital login
-        $authenticationService->login('toby', 'password', true);
+        $authenticationService->login('toby', 'password1', true);
 
         //get the remember me object
         $rememberMeObject = $this->documentManager

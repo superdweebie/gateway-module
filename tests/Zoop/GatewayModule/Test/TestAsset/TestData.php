@@ -16,7 +16,7 @@ class TestData
         $user->setFirstName('Toby');
         $user->setLastName('McQueen');
         $user->setEmail('toby@here.com');
-        $user->setPassword('password');
+        $user->setPassword('password1');
 
         $documentManager->persist($user);
 
